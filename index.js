@@ -26,30 +26,32 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_KEY 
 });
 
-app.use(cors())
+// app.use(cors())
 
-// const allowedOrigins = [
-//     'https://cafeeasefoodording.netlify.app'
-// ];
+// const express = require('express');
+// const cors = require('cors');
+// const app = express();
 
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if (allowedOrigins.includes(origin)) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     }
-// };
+const allowedOrigins = [
+  'https://main--funny-kheer-915bf8.netlify.app',
+  'https://cafeeasefoodording.netlify.app'
+];
 
-// app.use(cors(corsOptions));
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
+
+// Your routes here
 
 
-// app.use(cors({
-//   origin:[process.env.FRONTEND_URL , process.env.DASHBOARD_URL],
-//   methods:["GET" , "POST" , "PUT" , "DELETE"],
-//   credentials:true,
-// }))
 
 
 app.use((req,res,next)=>{
